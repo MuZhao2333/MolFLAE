@@ -6,10 +6,7 @@ import numpy as np
 from rdkit import Chem
 from rdkit.Chem import Descriptors, Crippen, rdMolDescriptors, QED,MACCSkeys,DataStructs
 from scipy.stats import pearsonr
-import sys
-import os
 import argparse
-from rdkit import Chem
 parser = argparse.ArgumentParser()
 parser.add_argument('--sdf_file', type=str,default='./latent_experiment/ex2/generated/merged.sdf')
 parser.add_argument('--n_interpolations', type=int, default=12)

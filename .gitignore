@@ -1,2 +1,3 @@
-/ckpt-zinc9M
-/data
+ckpt-zinc9M/
+data/
+*.pyc

@@ -10,13 +10,9 @@ from model.train_loop import TrainLoop,center_pos
 from config.config import load_config
 import torch
 import pytorch_lightning as pl
-import sys
-import os
 import random
 import torch.nn.functional as F
-from rdkit import Chem
 from tqdm import tqdm
-import pickle
 from utils.build_mol import MoleculeBuilder
 MAP_ATOM_TYPE_ONLY_TO_INDEX = {
     6: 0,

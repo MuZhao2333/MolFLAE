@@ -1,5 +1,5 @@
-import sys
 import os
+import sys
 import argparse
 current_dir = os.getcwd()
 sys.path.insert(0, current_dir)
@@ -11,11 +11,6 @@ from config.config import load_config
 from model.train_loop import MAP_ATOM_TYPE_ONLY_TO_INDEX, MAP_INDEX_TO_ATOM_TYPE_ONLY, center_pos
 import torch.nn.functional as F
 from utils.build_mol import MoleculeBuilder
-import os
-from rdkit import Chem
-import torch
-from tqdm import tqdm
-import os
 from rdkit import Chem
 import torch
 from tqdm import tqdm
