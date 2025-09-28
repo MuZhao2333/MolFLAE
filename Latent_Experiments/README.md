@@ -1,7 +1,7 @@
 # Latent Space Experiments
-Before running the experiments, please download the pre-trained model from [Google Drive](abaaba) and place it in the `Latent_Experiments/ckpt-zinc9M` directory, as well as the sdf files from [Google Drive](abaaba) and place it in the `Latent_Experiments/data` directory.
+Before running the experiments, please download the pre-trained model from [Google Drive](https://drive.google.com/file/d/161pBWbsbkZbN4r57XsuWU6QzYA5nuvAB/view?usp=drive_link) and place it in the `Latent_Experiments/ckpt-zinc9M` directory, as well as the sdf files from [Google Drive](https://drive.google.com/file/d/1-08MAzwgxUL1DCbSZqRgpHV4oTdohng0/view?usp=drive_link) and place it in the `Latent_Experiments/data` directory.
 
-As we observed when running the experiments on a single NVIDIA A100, the maximum memory usage was approximately 22GB. Therefore, we recommend running the experiments on a machine with at least 24GB of GPU memory.
+As we observed when running the experiments on a single NVIDIA A100, the maximum memory usage was approximately 25GB. Therefore, we recommend running the experiments on a machine with at least 30GB of GPU memory.
 
 MolFLAE only output atom point clouds, and the bond information is inferred using OpenBabel. Due to some bugs in OpenBabel, we need to repair the bond orders of the generated molecules using Schrodinger in some experiments.
 
@@ -18,6 +18,7 @@ Use the 1000 pairs we selected:
 ```bash
 python latent_experiment/ex2/2_inter.py
 ```
+You can change the interpolation steps by adding the argument `--n_interpolations n_step` (default n_step=12).
 The generated sdf files will be saved in `Latent_Experiments/latent_experiment/ex2/generated`.
 
 Then, repaire the molecules using Schrodinger, for example:
@@ -46,5 +47,4 @@ python latent_experiment/ex3/3_compute.py --switch zh  # compute metrics of swit
 python latent_experiment/ex3/3_compute.py --switch zx  # compute metrics of switchZx molecules  
 ``` 
 
-其他选项，如用自己的sdf做实验1，或是选其他的pairs复现实验2和3，根据代码从命令行输入即可（
 If you want to use your own sdf files for experiment 1, or select other pairs to reproduce experiments 2 and 3, you can input them from the command line according to the code.
