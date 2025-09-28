@@ -1,0 +1,112 @@
+encoder_config:
+  num_blocks: 1                  
+  num_layers: 9                  
+  hidden_dim: 128               
+  n_heads: 16                     
+  knn: 32                        
+  num_r_gaussian: 20             
+  edge_feat_dim: 4               
+  num_node_types: 8              
+  act_fn: relu                
+  norm: True                     
+  cutoff_mode: global        
+  ew_net_type: r               
+  num_init_x2h: 1                
+  num_init_h2x: 1                
+  num_x2h: 1                     
+  num_h2x: 1                     
+  r_max: 10.0                    
+  x2h_out_fc: False               
+  sync_twoup: False              
+  global_node_num: 10            
+  ligand_v_dim: 9
+
+optimal_layer_config:
+  latent_dim: 32                
+
+decoder_config:
+  beta1: 1.5
+  center_pos_mode: true
+  destination_prediction: true
+  discrete_steps: 1000
+  ligand_atom_feature_dim: 9
+  net_config:
+    act_fn: relu
+    cutoff_mode: ~global  
+    edge_feat_dim: 4
+    ew_net_type: global
+    hidden_dim: 128   
+    knn: 32
+    n_heads: 16
+    name: unio2net
+    norm: true
+    num_blocks: 1
+    num_h2x: 1
+    num_layers: 9
+    num_node_types: 8
+    num_r_gaussian: 20
+    num_x2h: 1
+    r_max: 10.0
+    sync_twoup: false
+    x2h_out_fc: false
+  node_indicator: true
+  pos_init_mode: zero
+  protein_atom_feature_dim: 32
+  sampling_strategy: end_back_pmf
+  sigma1_coord: 0.03
+  t_min: 0.0001
+  time_emb_dim: 1
+  time_emb_mode: simple
+  use_discrete_t: true
+
+train:
+  max_epochs: 40                 
+  batch_size: 200
+  num_workers: 48
+  gpus: [0,1,2,3,4,5,6,7] 
+  recon_loss:
+    recon_loss_weight: 1
+    d_loss_weight: 1
+    c_loss_weight: 1
+  kl_loss:
+    kl_loss_weight: 0.1
+    Zh_kl_loss_weight: 0.3
+    Zx_kl_loss_weight: 0.5
+    sigma2: 10
+
+  optimizer:
+    beta1: 0.95
+    beta2: 0.999
+    lr: 0.0005
+    type: adam
+    weight_decay: 0  
+  
+  scheduler:
+    factor: 0.6
+    max_iters: 20000
+    min_lr: 1.0e-06
+    patience: 10
+    type: plateau 
+  ckpt_path: ./data
+  ckpt_freq: 1
+  ema_decay: 0.999
+  max_grad_norm: Q
+  val_freq: 0.25
+
+data:
+  normalizer_dict:               
+    pos: 10.0                            
+  path: ./data       
+  val_ratio: 1e-4
+  test_ratio: 1e-5
+  indices_path: ./data
+evaluation:
+  batch_size: 200
+  num_samples: 4            
+  sample_steps: 100     
+  sample_num_atoms: 'ref'   
+  num_workers: 48   
+  save_dir: ./sample_ZINC
+
+test:
+  gpus: [0]
