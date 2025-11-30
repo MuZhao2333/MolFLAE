@@ -2,6 +2,8 @@
 
 MolFLAE is a codebase for the paper "Manipulating 3D Molecules in a Fixed-Dimensional E(3)-Equivariant Latent Space" (NeurIPS 2025).
 
+<img src='assets/main_fig.png' width='70%'/>
+
 Current release
 --------------------------
 This release provides code and scripts for latent-space experiments under `Latent_Experiments/`.
