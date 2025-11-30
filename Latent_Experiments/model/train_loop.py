@@ -114,7 +114,11 @@ class TrainLoop(pl.LightningModule):
         Zh_mu = self.Wh_mu(global_h)
         Zh_log_var = -torch.abs(self.Wh_log_var(global_h))
         Zx_mu = global_x.clone()
-        Zx_log_var = -torch.abs(self.Wx_log_var(global_h)).expand_as(Zx_mu)
+
+        # clamp log_var to avoid too large variance
+        upper = torch.log(torch.tensor(self.cfg['train']['kl_loss']['sigma2']**2, device=Zx_mu.device, dtype=Zx_mu.dtype))
+        raw = self.Wx_log_var(global_h).expand_as(Zx_mu)
+        Zx_log_var = torch.clamp(raw, max=upper)
 
         data_size = torch.unique(global_batch).size(0)
 
